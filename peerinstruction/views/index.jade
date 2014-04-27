@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    div.container
+        div.row
+            div.col-md-4
+                h1= title
+                p Welcome! Please select your mode below:
+        div.row
+            div.col-md-2
+                a.btn.btn-danger(href='/teacher') I'm a teacher
+            div.col-md-2
+                a.btn.btn-success(href='/students') I'm a student
