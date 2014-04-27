@@ -4,6 +4,10 @@ Installation
 Erizo
 -----
 
+.. warning::
+    This application doesn't work with Erizo **yet**.  Don't bother with
+    installing Erizo.
+
 Erizo is MCU used for peer-instruction.  Start with cloning it's git
 repository::
 
