@@ -6,7 +6,7 @@ Erizo
 
 .. warning::
     This application doesn't work with Erizo **yet**.  Don't bother with
-    installing Erizo.
+    installing Eriz.o
 
 Erizo is MCU used for peer-instruction.  Start with cloning it's git
 repository::
@@ -42,7 +42,7 @@ directory::
     git clone git@github.com:pbanaszkiewicz/peer-instruction.git ./peer-instruction
 
 Third, install project dependencies (remember to run this command from
-``peer-instruction`` directory!):
+``peer-instruction`` directory!)::
 
     cd peer-instruction/peerinstruction
     npm install
