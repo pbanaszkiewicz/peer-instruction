@@ -49,4 +49,4 @@ Third, install project dependencies (remember to run this command from
 
 Now run the server::
 
-    ./bin/www.js
+    ./bin/www
