@@ -5,6 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// CHANGE THIS TO YOUR COMPILED ERIZOAPI NODE MODULE
+// <your_path>/licode/erizoAPI/build/Release/addon
+var erizoAPI = require('/home/piotr/workspace' +
+                       '/licode/erizoAPI/build/Release/addon')
+
 var routes = require('./routes/index');
 var teacher = require('./routes/teacher');
 var students = require('./routes/students');
