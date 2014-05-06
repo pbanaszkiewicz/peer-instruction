@@ -1,29 +1,30 @@
 Installation
 ============
 
-Erizo
------
+Licode
+------
 
-.. warning::
-    This application doesn't work with Erizo **yet**.  Don't bother with
-    installing Erizo.
-
-Erizo is an `MCU`_ used for peer-instruction.  Start with cloning it's git
-repository::
+`Licode by Lynckia`_ is a large suite for video conferences.  Peer instruction
+heavily uses its components: Erizo and Nuve.  First start with cloning Licode's
+git repository::
 
     git clone git@github.com:ging/licode.git ./licode
 
 Follow
 `the official guide <http://lynckia.com/licode/install.html#dependencies>`__
-to build Erizo (steps #3 and #4 in official guide).
+to build and install Licode (steps #3 and #4 in official guide).
 
-.. _MCU: http://en.wikipedia.org/wiki/Multipoint_control_unit
+Please also read about `Licode architecture`_ to familiarize yourself with
+terms used in this documentation.
+
+.. _Licode by Lynckia: http://lynckia.com/licode/
+.. _Licode architecture: http://lynckia.com/licode/architecture.html
 
 Peer instruction
 ----------------
 
 First, set up your computer (you don't need to install ``nodejs`` or ``npm``
-if you installed Erizo first)::
+if you installed Licode first)::
 
     sudo aptitude install nodejs npm
 
@@ -41,6 +42,8 @@ Third, install project dependencies::
 
 Configuration
 -------------
+
+.. warning:: **This section is WIP!**
 
 In ``peerinstruction/app.js`` configure the path to ``erizoAPI`` compilation
 directory.  In my case it's ``licode/erizoAPI/build/Release/addon``.

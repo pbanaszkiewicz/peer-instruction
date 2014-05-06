@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// CHANGE THIS TO YOUR COMPILED ERIZOAPI NODE MODULE
-// <your_path>/licode/erizoAPI/build/Release/addon
-var erizoAPI = require('/home/piotr/workspace' +
-                       '/licode/erizoAPI/build/Release/addon')
+if (process.env.ERIZO_PATH === undefined)
+    // CHANGE THIS TO YOUR COMPILED ERIZOAPI NODE MODULE
+    // <your_path>/licode/erizoAPI/build/Release/addon
+    process.env.ERIZO_PATH = '/home/piotr/workspace' +
+                             '/licode/erizoAPI/build/Release/addon'
+
+var erizoAPI = require(process.env.ERIZO_PATH)
 
 var routes = require('./routes/index');
 var teacher = require('./routes/teacher');
