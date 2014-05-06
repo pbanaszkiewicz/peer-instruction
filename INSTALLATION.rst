@@ -60,7 +60,7 @@ There are two ways to achieve this:
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<PATH>/licode/erizo/build/erizo/
 
 2) "Temporary" settings.
-   To run the server, use following expression::
+   To run the server, use following expression (remember, it's one line!)::
 
         ERIZO_HOME=<PATH>/licode/erizo LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<PATH>/licode/erizo/build/erizo/ ./bin/www
 
