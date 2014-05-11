@@ -4,9 +4,9 @@ Installation
 Licode
 ------
 
-`Licode by Lynckia`_ is a large suite for video conferences.  Peer instruction
-heavily uses its components: Erizo and Nuve.  First start with cloning Licode's
-git repository::
+`Licode by Lynckia`_ is a large suite for handling video conferences.  Peer
+instruction heavily uses its components called Erizo and Nuve.  First start
+with cloning Licode's git repository::
 
     git clone git@github.com:ging/licode.git ./licode
 
@@ -15,7 +15,7 @@ Follow
 to build and install Licode (steps #3 and #4 in official guide).
 
 Please also read about `Licode architecture`_ to familiarize yourself with
-terms used in this documentation.
+the terms used in this documentation.
 
 .. _Licode by Lynckia: http://lynckia.com/licode/
 .. _Licode architecture: http://lynckia.com/licode/architecture.html

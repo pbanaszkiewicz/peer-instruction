@@ -1,0 +1,16 @@
+{
+  "name": "nuveServer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~4.0.0",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "mongojs": "~0.13.0",
+    "amqp": "~0.2.0",
+    "ejs": "~1.0.0"
+  }
+}
