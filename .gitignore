@@ -54,3 +54,6 @@ docs/_build/
 
 # NPM modules
 node_modules/
+
+# some binary file from MacOSX
+.DS_Store
