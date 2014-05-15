@@ -35,47 +35,20 @@ directory::
 
 Third, install project dependencies::
 
-    cd peer-instruction/peerinstruction
+    cd peer-instruction/nuveServer
+    npm install
+    cd ../peerinstruction
     npm install
 
-.. _configuration:
+Services
+--------
 
-Configuration
--------------
+.. warning: Work In Progress!
 
-.. warning:: **This section is WIP!**
+To run Peer Instruction you have to launch a few services first:
 
-In ``peerinstruction/app.js`` configure the path to ``erizoAPI`` compilation
-directory.  In my case it's ``licode/erizoAPI/build/Release/addon``.
+* erizoController (to be found in Licode repository)
+* nuveServer (included in the repository)
 
-It's advised to use absolute paths.
-
-Now gets trickier.  The server and required NodeJS modules depend on various
-shared object libraries (``.so`` files).  For the server to find them, *you*
-must to show where these files are located.
-
-There are two ways to achieve this:
-
-1) "Permanent" settings.
-   To your ``~/.bashrc`` append these lines::
-
-        export ERIZO_HOME=<PATH>/licode/erizo
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<PATH>/licode/erizo/build/erizo/
-
-2) "Temporary" settings.
-   To run the server, use following expression (remember, it's one line!)::
-
-        ERIZO_HOME=<PATH>/licode/erizo LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<PATH>/licode/erizo/build/erizo/ ./bin/www
-
-Please remember to change ``<PATH>`` to your Licode installation directory.
-It's advised to use absolute paths.
-
-Dev server
-----------
-
-To run the server::
-
-    cd peer-instruction/peerinstruction
-    ./bin/www
-
-Don't forget to ``ERIZO_HOME`` and ``LD_LIBRARY_PATH``, see `Configuration`_.
+Then you can finally run Peer Instruction
+(``peer-instruction/peerinstruction/bin/www``).
