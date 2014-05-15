@@ -1,13 +1,15 @@
 extends layout
 
+block sidebar
+  div.form-group
+    label(for="listRooms") Select the room you want to join
+    select.form-control#listRooms(size=5)
+    button.btn.btn-primary#refreshRooms Refresh
+  div.form-group
+    label(for="username") Your name
+    input.form-control#username(type="text" placeholder="John")
+  button.center-block.btn.btn-success#enroll Enroll in the class
+
 block content
-    div.container
-        div.row
-            div.col-md-4
-                h1= title
-                p Welcome! Please select your mode below:
-        div.row
-            div.col-md-2
-                a.btn.btn-danger(href='/teacher') I'm a teacher
-            div.col-md-2
-                a.btn.btn-success(href='/students') I'm a student
+  div(style="height: 400px")#videoStream videostream
+  div(style="height: 400px")#smallerStreams smallerstreams
