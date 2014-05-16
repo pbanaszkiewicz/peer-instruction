@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session')
 
-var config = require('./configuration')
+var config = require('../licode/licode_config')
 var N = require('./nuveServerAPI')
 // register application so that it can talk to nuve
 N.API.init(config.nuve.superserviceID, config.nuve.superserviceKey,
