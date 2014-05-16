@@ -1,9 +1,9 @@
 var express = require('express')
 var router = express.Router()
 var N = require('../nuveServerAPI')
-var config = require('../configuration')
+var config = require('../../licode/licode_config')
 N.API.init(config.nuve.superserviceID, config.nuve.superserviceKey,
-           config.nuve.address)
+           "http://localhost:3000/")
 
 /* GET home page */
 router.get('/', function(req, res) {
@@ -16,6 +16,7 @@ router.get('/rooms', function(req, res) {
         // the response from nuve is already in JSON format, no need to convert
         res.send(room)
     }, function(error) {
+        console.log(error)
         res.send(error)
     })
 })
