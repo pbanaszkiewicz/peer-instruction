@@ -12,8 +12,8 @@ config.rabbit.port = 5672;
 config.nuve.port = 3000
 config.nuve.address = "http://localhost:" + config.nuve.port + "/"
 config.nuve.dataBaseURL = "localhost/nuvedb";
-config.nuve.superserviceID = '5366a83287b6da84b6718825';
-config.nuve.superserviceKey = '31398';
+config.nuve.superserviceID = '5375fd2cbb73d9526156796c';
+config.nuve.superserviceKey = '29325';
 config.nuve.testErizoController = 'localhost:8080';
 
 //Use undefined to run clients without Stun

@@ -8,8 +8,14 @@ block sidebar
   div.form-group
     label(for="username") Your name
     input.form-control#username(type="text" placeholder="John")
-  button.center-block.btn.btn-success#enroll Enroll in the class
+  div.form-group
+    button.center-block.btn.btn-success#enroll Enroll in the class
+  div.form-group
+    label(for="roomName") New room name
+    input.form-control#roomName(type="text" placeholder="classroom")
+    button.center-block.btn.btn-danger#newRoom Create new room
 
 block content
-  div(style="height: 400px")#videoStream videostream
-  div(style="height: 400px")#smallerStreams smallerstreams
+  div.row
+    div.col-md-6(style="height: 400px")#videoStream videoStream
+    div.col-md-6(style="height: 400px")#smallerStreams smallerstreams

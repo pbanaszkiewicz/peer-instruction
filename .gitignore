@@ -57,3 +57,7 @@ node_modules/
 
 # some binary file from MacOSX
 .DS_Store
+
+# licode and vagrant directories
+.vagrant
+licode

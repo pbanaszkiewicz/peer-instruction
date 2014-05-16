@@ -28,6 +28,10 @@ window.onload = function() {
         })
     })
 
+    $("#newRoom").click(function() {
+        $.post("/room", {roomName: $("#roomName").val()})
+    })
+
     //
     $("#enroll").click(function() {
         username = $("#username").val()
@@ -43,7 +47,7 @@ window.onload = function() {
                 // if there's anything left in the div for video stream
                 $("#videoStream").empty()
 
-                room.addEventListener("room-connected", function() {
+                room.addEventListener("room-connected", function(roomEvent) {
                     console.log("Room connected!")
 
                     room.publish(localStream)
