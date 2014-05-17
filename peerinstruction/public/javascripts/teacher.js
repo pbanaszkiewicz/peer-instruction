@@ -2,6 +2,9 @@ window.onload = function() {
 
     var room, localStream;
 
+    $.get("/roomid", {roomName: "classroom"}, function(res) {
+        room = res;
+    })
 
     var subscribeToStreams = function(streams) {
         for (var index in streams) {
@@ -12,32 +15,13 @@ window.onload = function() {
         }
     }
 
-    // list all the rooms
-    var refreshRooms = function() {
-        $.getJSON("/rooms", function(rooms) {
-            console.log("Refreshed rooms")
-            $("#listRooms").empty()
-            for (var room in rooms)
-            {
-                $('#listRooms').append($("<option></option>")
-                                       .attr("value", rooms[room]._id)
-                                       .text(rooms[room].name)
-                );
-            }
-        })
-    }
-    $("#refreshRooms").click(refreshRooms)
-
-    $("#newRoom").click(function() {
-        $.post("/room", {roomName: $("#roomName").val()})
-    })
-
     //
     localStream = Erizo.Stream({audio: true, video: true, data: true})
 
-    $("#enroll").click(function() {
-        username = $("#username").val()
-        room = $("#listRooms").val()
+    $("#startStream").click(function() {
+        username = $("#username").val() || "Teacher"
+        $("#username").attr("disabled", "disabled")
+
         $.getJSON("/enroll", {username: username, room: room}, function(data) {
             console.log(data)
 
@@ -57,6 +41,8 @@ window.onload = function() {
                 })
 
                 room.addEventListener("stream-subscribed", function(event) {
+                    console.log("Stream subscribed!")
+
                     var stream = event.stream
                     var div = document.createElement("div")
                     div.setAttribute("style", "height: 160px; width: 120px")
@@ -66,6 +52,7 @@ window.onload = function() {
                 })
 
                 room.addEventListener("stream-added", function(event) {
+                    console.log("Stream added!")
                     var streams = []
                     streams.push(event.stream)
                     subscribeToStreams(streams)
@@ -92,6 +79,4 @@ window.onload = function() {
             localStream.init()
         })
     })
-
-    refreshRooms();
 }

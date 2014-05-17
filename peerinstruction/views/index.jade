@@ -1,21 +1,12 @@
 extends layout
 
-block sidebar
-  div.form-group
-    label(for="listRooms") Select the room you want to join
-    select.form-control#listRooms(size=5)
-    button.btn.btn-primary#refreshRooms Refresh
-  div.form-group
-    label(for="username") Your name
-    input.form-control#username(type="text" placeholder="John")
-  div.form-group
-    button.center-block.btn.btn-success#enroll Enroll in the class
-  div.form-group
-    label(for="roomName") New room name
-    input.form-control#roomName(type="text" placeholder="classroom")
-    button.center-block.btn.btn-danger#newRoom Create new room
-
 block content
   div.row
-    div.col-md-6(style="height: 400px")#videoStream videoStream
-    div.col-md-6(style="height: 400px")#smallerStreams smallerstreams
+    div.col-md-12
+      div.jumbotron
+        h1 Welcome to Peer Instruction!
+        p Select which mode are you joining in:
+        p
+          a.btn.btn-success.btn-lg.pull-left(href="/student") Student
+          a.btn.btn-danger.btn-lg.pull-right(href="/teacher") Teacher
+        div.clearfix

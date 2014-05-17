@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  div.row
+    div.col-md-6
+      h3 Rooms
+      p List of rooms:
+      ul#listRooms
+      hr
+      form.form-horizontal
+        div.form-group
+          label.col-sm-3.control-label(for="roomName") Add new room
+          div.col-sm-9
+            input.form-control#roomName(type="text" placeholder="Room name")
+        div.form-group
+          div.col-sm-offset-3.col-sm-9
+            div.checkbox
+              label
+                input#p2p(type="checkbox")
+                | Peer-to-Peer
+        div.form-group
+          div.col-sm-offset-3.col-sm-9
+            button.btn.btn-primary#newRoom Create new room
+      hr
+      form.form-horizontal
+        div.form-group
+          label.col-sm-3.control-label(for="roomId") Remove room
+          div.col-sm-9
+            input.form-control#roomId(type="text" placeholder="Room ID")
+        div.form-group
+          div.col-sm-offset-3.col-sm-9
+            button.btn.btn-danger#removeRoom Remove room
+    div.col-md-6
+      h3 Users
+      form.form-horizontal
+        div.form-group
+          label.col-sm-3.control-label(for="roomIdUsers") List room's users
+          div.col-sm-9
+            input.form-control#roomIdUsers(type="text" placeholder="Room ID")
+        div.form-group
+          div.col-sm-offset-3.col-sm-9
+            button.btn.btn-primary#getUsersList List users
+      hr
+      p Users:
+      ul#listUsers
+
+block additionaljs
+  script(src="/javascripts/settings.js")

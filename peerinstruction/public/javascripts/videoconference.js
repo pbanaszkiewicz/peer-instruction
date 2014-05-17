@@ -28,10 +28,6 @@ window.onload = function() {
     }
     $("#refreshRooms").click(refreshRooms)
 
-    $("#newRoom").click(function() {
-        $.post("/room", {roomName: $("#roomName").val()})
-    })
-
     //
     localStream = Erizo.Stream({audio: true, video: true, data: true})
 

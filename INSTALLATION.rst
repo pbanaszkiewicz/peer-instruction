@@ -49,7 +49,7 @@ Third, install project dependencies::
 Services
 --------
 
-.. warning: Work In Progress!
+.. warning:: Work In Progress!
 
 To run Peer Instruction you have to launch a few services first:
 
@@ -59,7 +59,14 @@ To run Peer Instruction you have to launch a few services first:
 You can do that by logging into Vagrant machine and invoking one script::
 
     $ vagrant ssh
-    vagrant@precise32:~$ /vagrant/licode/scripts/initLicode.sh
+    vagrant@precise32:~$ cd /vagrant/licode/scripts/
+    vagrant@precise32:~$ ./initLicode.sh
+
+.. note::
+    Make sure that ``licode/licode_config.js`` has the same IP set up in
+    ``config.erizoController.publicIP`` as the server you're running Peer
+    Instruction on.  For developing purposes it should be set to
+    ``127.0.0.1``.
 
 Then you can finally run Peer Instruction::
 
