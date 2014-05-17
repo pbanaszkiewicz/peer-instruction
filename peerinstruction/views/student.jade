@@ -1,0 +1,16 @@
+extends layout_fluid
+
+block sidebar
+  h3 Student
+  div.form-group
+    input.form-control#username(type="text" placeholder="Your name")
+    button.btn.btn-success#enroll Enroll in the classroom
+  hr
+
+block content
+  div.row
+    div.col-md-6(style="height: 400px")#videoStream videostream
+    div.col-md-6(style="height: 400px")#smallerStreams smallerstreams
+
+block additionaljs
+  script(src="/javascripts/student.js")

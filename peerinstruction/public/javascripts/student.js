@@ -1,6 +1,7 @@
 window.onload = function() {
 
-    var room, localStream;
+    var room, localStream
+    var streams = []
 
     $.get("/roomid", {roomName: "classroom"}, function(res) {
         room = res;
@@ -9,17 +10,17 @@ window.onload = function() {
     var subscribeToStreams = function(streams) {
         for (var index in streams) {
             var stream = streams[index];
-            if (localStream.getID() !== stream.getID()) {
+            if ((localStream.getID() !== stream.getID()) && stream.hasVideo()) {
                 room.subscribe(stream)
             }
         }
     }
 
     //
-    localStream = Erizo.Stream({audio: true, video: true, data: true})
+    localStream = Erizo.Stream({audio: false, video: false, data: true})
 
-    $("#startStream").click(function() {
-        username = $("#username").val() || "Teacher"
+    $("#enroll").click(function() {
+        username = $("#username").val() || "Student"
         $("#username").attr("disabled", "disabled")
 
         $.getJSON("/enroll", {username: username, room: room}, function(data) {
@@ -29,12 +30,12 @@ window.onload = function() {
                 console.log("Access accepted!")
 
                 // if there's anything left in the div for video stream
-                $("#videoStream").empty()
+                // $("#videoStream").empty()
 
                 room.addEventListener("room-connected", function(roomEvent) {
                     console.log("Room connected!")
 
-                    room.publish(localStream)
+                    // room.publish(localStream)
                     subscribeToStreams(roomEvent.streams)
                 })
 
@@ -43,7 +44,7 @@ window.onload = function() {
 
                     var stream = event.stream
                     var div = document.createElement("div")
-                    div.setAttribute("style", "height: 160px; width: 120px")
+                    div.setAttribute("style", "height: 120px; width: 160px")
                     div.setAttribute("id", "smallerStream" + stream.getID())
                     document.getElementById("smallerStreams").appendChild(div)
                     stream.show("smallerStream" + stream.getID())
@@ -51,7 +52,6 @@ window.onload = function() {
 
                 room.addEventListener("stream-added", function(event) {
                     console.log("Stream added!")
-                    var streams = []
                     streams.push(event.stream)
                     subscribeToStreams(streams)
                     ///
@@ -61,6 +61,8 @@ window.onload = function() {
                 })
 
                 room.addEventListener("stream-removed", function(event) {
+                    // TODO: this function doesn't remove streams from global
+                    // `streams` variable.  Might cause troubles :<
                     var stream = event.stream
                     if (stream.elementID !== undefined)
                     {
