@@ -1,14 +1,17 @@
 window.onload = function() {
 
-    var room, localStream
+    var roomId, localStream, room
 
     $.get("/roomid", {roomName: "classroom"}, function(res) {
-        room = res;
+        roomId = res;
     })
 
     var subscribeToStreams = function(streams) {
         for (var index in streams) {
-            var stream = streams[index];
+            var stream = streams[index]
+            console.log(stream.getID())
+            console.log(localStream.getID())
+            console.log(stream.hasVideo())
             if ((localStream.getID() !== stream.getID()) && stream.hasVideo()) {
                 room.subscribe(stream)
             }
@@ -22,7 +25,9 @@ window.onload = function() {
         username = $("#username").val() || "Student"
         $("#username").attr("disabled", "disabled")
 
-        $.getJSON("/enroll", {username: username, room: room}, function(data) {
+        $.getJSON("/enroll",
+                  {username: username, room: roomId, role: "student"},
+                  function(data) {
             room = Erizo.Room({token: data.token})
 
             console.log("Joining the room!")
@@ -33,6 +38,7 @@ window.onload = function() {
                 room.addEventListener("room-connected", function(roomEvent) {
                     console.log("Room connected!")
 
+                    room.publish(localStream)
                     subscribeToStreams(roomEvent.streams)
                 })
 
@@ -50,6 +56,10 @@ window.onload = function() {
                 room.addEventListener("stream-added", function(event) {
                     console.log("New stream available!")
                     subscribeToStreams([event.stream])
+                    if (event.stream.getID() === localStream.getID())
+                    {
+                        console.log("It's your stream that has been added!")
+                    }
                 })
 
                 room.addEventListener("stream-removed", function(event) {

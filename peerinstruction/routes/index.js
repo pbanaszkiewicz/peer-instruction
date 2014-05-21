@@ -90,6 +90,17 @@ router.get('/users', function(req, res) {
     })
 })
 
+/* GET the number of users within particular room */
+router.get('/usersnumber', function(req, res) {
+    roomId = req.param('roomId')
+    N.API.getUsers(roomId, function(users) {
+        data = JSON.parse(users)
+        res.json({count: data.length})
+    }, function(error) {
+        res.send(404, error)
+    })
+})
+
 /* Find room's id by looking for it's name */
 router.get('/roomid', function(req, res) {
     roomName = req.param('roomName') || 'classroom'

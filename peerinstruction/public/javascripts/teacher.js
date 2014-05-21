@@ -1,9 +1,9 @@
 window.onload = function() {
 
-    var room, localStream;
+    var roomId, localStream;
 
     $.get("/roomid", {roomName: "classroom"}, function(res) {
-        room = res;
+        roomId = res;
     })
 
     var subscribeToStreams = function(streams) {
@@ -15,6 +15,12 @@ window.onload = function() {
         }
     }
 
+    var updateStudentsNumber = function() {
+        $.getJSON("/usersnumber", {roomId: roomId}, function(res) {
+            $("#usersNumber").text(res.count - 1)  // don't count the teacher
+        })
+    }
+
     //
     localStream = Erizo.Stream({audio: true, video: true, data: true})
 
@@ -22,11 +28,15 @@ window.onload = function() {
         username = $("#username").val() || "Teacher"
         $("#username").attr("disabled", "disabled")
 
-        $.getJSON("/enroll", {username: username, room: room}, function(data) {
+        $.getJSON("/enroll",
+                  {username: username, room: roomId, role: "presenter"},
+                  function(data) {
             room = Erizo.Room({token: data.token})
 
+            console.log("Joining the room!")
+
             localStream.addEventListener("access-accepted", function() {
-                console.log("Access accepted!")
+                console.log("Access to the stream granted!")
 
                 // if there's anything left in the div for video stream
                 $("#videoStream").empty()
@@ -36,6 +46,7 @@ window.onload = function() {
 
                     room.publish(localStream)
                     subscribeToStreams(roomEvent.streams)
+                    updateStudentsNumber()
                 })
 
                 room.addEventListener("stream-subscribed", function(event) {
@@ -50,14 +61,13 @@ window.onload = function() {
                 })
 
                 room.addEventListener("stream-added", function(event) {
-                    console.log("Stream added!")
-                    var streams = []
-                    streams.push(event.stream)
-                    subscribeToStreams(streams)
-                    ///
-                    if (localStream.getID() === event.stream.getID()) {
-                        console.log("Your stream has been published!");
+                    console.log("New stream available!")
+                    // subscribeToStreams([event.stream])
+                    if (event.stream.getID() === localStream.getID())
+                    {
+                        console.log("It's your stream that has been added!")
                     }
+                    updateStudentsNumber();
                 })
 
                 room.addEventListener("stream-removed", function(event) {
