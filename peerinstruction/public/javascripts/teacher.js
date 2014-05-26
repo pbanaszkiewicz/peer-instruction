@@ -49,19 +49,9 @@ window.onload = function() {
                     updateStudentsNumber()
                 })
 
-                room.addEventListener("stream-subscribed", function(event) {
-                    console.log("Stream subscribed!")
-
-                    var stream = event.stream
-                    var div = document.createElement("div")
-                    div.setAttribute("style", "height: 160px; width: 120px")
-                    div.setAttribute("id", "smallerStream" + stream.getID())
-                    document.getElementById("smallerStreams").appendChild(div)
-                    stream.show("smallerStream" + stream.getID())
-                })
-
                 room.addEventListener("stream-added", function(event) {
                     console.log("New stream available!")
+
                     // subscribeToStreams([event.stream])
                     if (event.stream.getID() === localStream.getID())
                     {
@@ -78,6 +68,7 @@ window.onload = function() {
                         document.body.removeChild(element)
                     }
                     console.log("Removed stream ", stream.getID())
+                    updateStudentsNumber();
                 })
 
                 room.connect()

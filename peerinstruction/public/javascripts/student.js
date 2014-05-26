@@ -1,6 +1,6 @@
 window.onload = function() {
 
-    var roomId, localStream, room
+    var roomId, localStream, room, teacherStream
 
     $.get("/roomid", {roomName: "classroom"}, function(res) {
         roomId = res;
@@ -9,9 +9,6 @@ window.onload = function() {
     var subscribeToStreams = function(streams) {
         for (var index in streams) {
             var stream = streams[index]
-            console.log(stream.getID())
-            console.log(localStream.getID())
-            console.log(stream.hasVideo())
             if ((localStream.getID() !== stream.getID()) && stream.hasVideo()) {
                 room.subscribe(stream)
             }
@@ -26,7 +23,7 @@ window.onload = function() {
         $("#username").attr("disabled", "disabled")
 
         $.getJSON("/enroll",
-                  {username: username, room: roomId, role: "student"},
+                  {username: username, room: roomId, role: "presenter"},
                   function(data) {
             room = Erizo.Room({token: data.token})
 
@@ -45,12 +42,15 @@ window.onload = function() {
                 room.addEventListener("stream-subscribed", function(event) {
                     console.log("Stream subscribed!")
 
-                    var stream = event.stream
+                    // singleton stream
+                    teacherStream = event.stream
                     var div = document.createElement("div")
-                    div.setAttribute("style", "height: 120px; width: 160px")
-                    div.setAttribute("id", "smallerStream" + stream.getID())
+                    div.setAttribute("style", "width: 600px; height: 400px;")
+                    div.setAttribute("id", "stream" + teacherStream.getID())
                     document.getElementById("videoStream").appendChild(div)
-                    stream.show("smallerStream" + stream.getID())
+                    // stream.show("smallerStream" + stream.getID())
+
+                    teacherStream.show("stream" + teacherStream.getID())
                 })
 
                 room.addEventListener("stream-added", function(event) {

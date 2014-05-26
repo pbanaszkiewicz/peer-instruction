@@ -5,13 +5,20 @@ block sidebar
   div.form-group
     input.form-control#username(type="text" placeholder="Your name")
   hr
-  p <span class="badge" id="usersNumber">42</span> Students
+  p <span class="badge" id="usersNumber">0</span> Students
+  p Here will appear chat.
 
 block content
   div.row
-    div.col-md-6(style="height: 400px")#videoStream
-      button.btn.btn-success#startStream Start the stream
-    div.col-md-6(style="height: 400px")#smallerStreams smallerstreams
+    div.col-md-6
+      h3 Your stream
+      div(style="width: 600px; height: 400px")#videoStream
+        button.btn.btn-success#startStream Start the stream
+    div.col-md-6
+      h3 Additional stuff
+        button.btn.btn-danger.pull-right#switchMode Split students into smaller groups
+      p| I plan to add special functionality here, including: whiteboard,
+       | questions asking, voting for a break / topic understanding, etc.
 
 block additionaljs
   script(src="/javascripts/teacher.js")

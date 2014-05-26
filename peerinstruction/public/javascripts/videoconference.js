@@ -35,8 +35,6 @@ window.onload = function() {
         username = $("#username").val()
         room = $("#listRooms").val()
         $.getJSON("/enroll", {username: username, room: room}, function(data) {
-            console.log(data)
-
             room = Erizo.Room({token: data.token})
 
             localStream.addEventListener("access-accepted", function() {
