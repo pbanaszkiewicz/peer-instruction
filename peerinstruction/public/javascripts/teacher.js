@@ -21,6 +21,13 @@ window.onload = function() {
         })
     }
 
+    $("#switchMode").click(function() {
+        if (localStream.showing) {
+            args = {code: 1, text: "Swich to student's mode", timestamp: Date.now()}
+            localStream.sendData({text: "dupa"})
+        }
+    })
+
     //
     localStream = Erizo.Stream({audio: true, video: true, data: true})
 
@@ -36,7 +43,7 @@ window.onload = function() {
             console.log("Joining the room!")
 
             localStream.addEventListener("access-accepted", function() {
-                console.log("Access to the stream granted!")
+                console.log("Access to the camera granted!")
 
                 // if there's anything left in the div for video stream
                 $("#videoStream").empty()
@@ -53,8 +60,7 @@ window.onload = function() {
                     console.log("New stream available!")
 
                     // subscribeToStreams([event.stream])
-                    if (event.stream.getID() === localStream.getID())
-                    {
+                    if (event.stream.getID() === localStream.getID()) {
                         console.log("It's your stream that has been added!")
                     }
                     updateStudentsNumber();
@@ -62,8 +68,7 @@ window.onload = function() {
 
                 room.addEventListener("stream-removed", function(event) {
                     var stream = event.stream
-                    if (stream.elementID !== undefined)
-                    {
+                    if (stream.elementID !== undefined) {
                         var element = document.getElementById(stream.elementID)
                         document.body.removeChild(element)
                     }
