@@ -36,7 +36,7 @@ window.onload = function() {
         $("#username").attr("disabled", "disabled")
 
         $.getJSON("/enroll",
-                  {username: username, room: roomId, role: "presenter"},
+                  {username: username, room: roomId, role: "teacher"},
                   function(data) {
             room = Erizo.Room({token: data.token})
 

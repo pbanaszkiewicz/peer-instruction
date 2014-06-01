@@ -63,10 +63,9 @@ You can do that by logging into Vagrant machine and invoking one script::
     vagrant@precise32:~$ ./initLicode.sh
 
 .. note::
-    Make sure that ``licode/licode_config.js`` has the same IP set up in
-    ``config.erizoController.publicIP`` as the server you're running Peer
-    Instruction on.  For developing purposes it should be set to
-    ``127.0.0.1``.
+    Default configuration differs a little bit from what peer instruction
+    requires.  Please use the configuration file I prepared:
+    https://gist.github.com/pbanaszkiewicz/503492c3bab0fd6ebc49
 
 Then you can finally run Peer Instruction::
 
