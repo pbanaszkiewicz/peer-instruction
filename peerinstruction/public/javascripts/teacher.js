@@ -24,7 +24,7 @@ window.onload = function() {
     $("#switchMode").click(function() {
         if (localStream.showing) {
             args = {code: 1, text: "Swich to student's mode", timestamp: Date.now()}
-            localStream.sendData({text: "dupa"})
+            localStream.sendData(args)
         }
     })
 
