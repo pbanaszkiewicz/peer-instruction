@@ -24,6 +24,9 @@ window.onload = function() {
     $("#switchMode").click(function() {
         if (localStream.showing) {
             args = {code: 1, text: "Swich to student's mode", timestamp: Date.now()}
+
+            $.getJSON("/createroomsforstudents", {roomId: roomId})
+
             localStream.sendData(args)
         }
     })

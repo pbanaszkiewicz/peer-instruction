@@ -1,12 +1,13 @@
-extends layout
+extends base
 
-block content
-  div.row
-    div.col-md-12
-      div.jumbotron
-        h1 Welcome to Peer Instruction!
-        p Select which mode are you joining in:
-        p
-          a.btn.btn-success.btn-lg.pull-left(href="/student") Student
-          a.btn.btn-danger.btn-lg.pull-right(href="/teacher") Teacher
-        div.clearfix
+block container
+    div.container
+      div.row
+        div.col-md-12
+          div.jumbotron
+            h1 Welcome to Peer Instruction!
+            p Select which mode are you joining in:
+            p
+              a.btn.btn-success.btn-lg.pull-left(href="/student") Student
+              a.btn.btn-danger.btn-lg.pull-right(href="/teacher") Teacher
+            div.clearfix

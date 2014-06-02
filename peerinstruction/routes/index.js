@@ -118,8 +118,8 @@ router.get('/roomid', function(req, res) {
             }
         }
 
-        // Because JS sucks, you can't have res.send within the loop and in
-        // case the room wasn't found res.send(404) after the loop.
+        // Because JS is primitive, you can't have res.send within the loop and
+        // in case the room wasn't found res.send(404) after the loop.
         if (found !== undefined)
             res.send(found)
         else
@@ -140,6 +140,45 @@ router.get('/enroll', function(req, res) {
         }, function(error) {
             res.send(500, error)
         })
+})
+
+/* prepare rooms for student groups */
+router.get('/createroomsforstudents', function(req, res) {
+    // TODO: check if it's request from the teacher
+    roomId = req.param('roomId')
+    N.API.getUsers(roomId, function(users) {
+        users = JSON.parse(users)
+
+        // filter out teacher(s)
+        users = users.filter(function(user) {
+            return user.role === "student"
+        })
+        // users_count = users.length
+        users_count = req.param("users_count")
+        max_rooms = config.erizoController.warning_n_rooms || 15
+
+        var rooms_number = 0
+        if (Math.ceil(users_count / 2) < max_rooms) {
+            // we can split students into pairs
+            rooms_number = Math.ceil(users_count / 2)
+
+        }
+        else if (Math.ceil(users_count / 3) < max_rooms) {
+            // we can split students into groups of 3
+            rooms_number = Math.ceil(users_count / 3)
+
+        }
+        else {
+            rooms_number = max_rooms - 1
+        }
+
+        // now split arrange students into `rooms_number` groups
+        console.log(users_count, "-", max_rooms, "-", rooms_number)
+
+        res.json({})
+    }, function(error) {
+        res.send(404, error)
+    })
 })
 
 module.exports = router
