@@ -157,23 +157,41 @@ router.get('/createroomsforstudents', function(req, res) {
         users_count = req.param("users_count")
         max_rooms = config.erizoController.warning_n_rooms || 15
 
+        // The algorithm below works as to ensure that the number of rooms
+        // being created doesn't exceed the warning number of rooms allowed
+        // by Erizo.  No matter how many students there are, there will always
+        // be a 1-room space left.  Ie. if warning is triggered with 15 rooms,
+        // the algorithm will always allow to create 14 rooms at most.
+        //
+        // This algorithm doesn't take into account the number of existing
+        // rooms.
+        //
+        // Furthermore, rooms don't have attributes, so it's necessary to give
+        // them names that are regex-able: we need to get rid of them after
+        // all...
         var rooms_number = 0
+        var students_per_room = 0;
         if (Math.ceil(users_count / 2) < max_rooms) {
             // we can split students into pairs
             rooms_number = Math.ceil(users_count / 2)
+            students_per_room = 2
 
         }
         else if (Math.ceil(users_count / 3) < max_rooms) {
             // we can split students into groups of 3
             rooms_number = Math.ceil(users_count / 3)
+            students_per_room = 3
 
         }
         else {
             rooms_number = max_rooms - 1
+            students_per_room = Math.floor(users_count / rooms_number)
         }
 
         // now split arrange students into `rooms_number` groups
         console.log(users_count, "-", max_rooms, "-", rooms_number)
+
+        // do the actual split
 
         res.json({})
     }, function(error) {
